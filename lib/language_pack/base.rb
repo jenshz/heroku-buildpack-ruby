@@ -172,8 +172,16 @@ private ##################################
   # (indented by 6 spaces)
   # @param [String] message to be displayed
   def puts(message)
+    unless @started
+      @started   = Time.now
+      Kernel.puts "======> #{@started}"
+    end
+    current = Time.now
+    time = (current - @started)
+
+
     message.split("\n").each do |line|
-      super "       #{line.strip}"
+      super "       #{time} : #{line.strip}"
     end
     $stdout.flush
   end
