@@ -157,8 +157,8 @@ private ##################################
   # (denoted by ----->)
   # @param [String] topic message to be displayed
   def topic(message)
-    @started ||= Time.zone.now
-    current    = Time.zone.now
+    @started ||= Time.now
+    current    = Time.now
     time = @started - current
 
     Kernel.puts "#{time} -----> #{message}"
