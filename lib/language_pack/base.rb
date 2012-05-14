@@ -157,7 +157,11 @@ private ##################################
   # (denoted by ----->)
   # @param [String] topic message to be displayed
   def topic(message)
-    Kernel.puts "-----> #{message}"
+    @started ||= Time.zone.now
+    current    = Time.zone.now
+    time = @started - current
+
+    Kernel.puts "#{time} -----> #{message}"
     $stdout.flush
   end
 
