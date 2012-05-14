@@ -157,11 +157,14 @@ private ##################################
   # (denoted by ----->)
   # @param [String] topic message to be displayed
   def topic(message)
-    @started ||= Time.now
-    current    = Time.now
-    time = @started - current
+    unless @started
+      @started   = Time.now
+      Kernel.puts "======> #{@started}"
+    end
+    current = Time.now
+    time = (current - @started)
 
-    Kernel.puts "#{time} -----> #{message}"
+    Kernel.puts "-----> #{time} : #{message}"
     $stdout.flush
   end
 
