@@ -42,24 +42,6 @@ private
         topic("Preparing app for Rails asset pipeline")
         if File.exists?("public/assets/manifest.yml")
           puts "Detected manifest.yml, assuming assets were compiled locally"
-        else
-          ENV["RAILS_GROUPS"] ||= "assets"
-          ENV["RAILS_ENV"]    ||= "production"
-
-          puts "Running: rake assets:precompile"
-          rake_output = ""
-          rake_output << run("env PATH=$PATH:bin bundle exec rake assets:precompile 2>&1")
-          puts rake_output
-
-          if $?.success?
-            log "assets_precompile", :status => "success"
-          else
-            log "assets_precompile", :status => "failure"
-            puts "Precompiling assets failed, enabling runtime asset compilation"
-            install_plugin("rails31_enable_runtime_asset_compilation")
-            puts "Please see this article for troubleshooting help:"
-            puts "http://devcenter.heroku.com/articles/rails31_heroku_cedar#troubleshooting"
-          end
         end
       end
     end
